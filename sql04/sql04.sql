@@ -15,7 +15,7 @@ where salary < (select avg(salary)
 --합니다.
 --//11명
 
---1)조건절 비교
+--1)조건절 비교 0.001초
 select employee_id,
 		last_name,
 		salary,
@@ -27,7 +27,7 @@ where (department_id , salary) in (select department_id,
 								   group by department_id)
 order by salary desc;
 
---2)테이블 생성 비교
+--2)테이블 생성 비교 0.002초
 select es.employee_id,
         es.last_name,
         es.salary,
