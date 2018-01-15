@@ -15,6 +15,7 @@ where salary < (select avg(salary)
 --합니다.
 --//11명
 
+--1)조건절 비교
 select employee_id,
 		last_name,
 		salary,
@@ -25,6 +26,18 @@ where (department_id , salary) in (select department_id,
 								   from employees
 								   group by department_id)
 order by salary desc;
+
+--2)테이블 생성 비교
+select es.employee_id,
+        es.last_name,
+        es.salary,
+        es.department_id
+from employees es, (select department_id,
+                            max(salary) salary
+                            from employees
+                            group by department_id) ms
+where es.department_id = ms.department_id and es.salary = ms.salary
+order by es.salary desc;
 
 
 --문제3.
@@ -38,7 +51,7 @@ from  (select job_id,
 	  sum(salary) salary
 	  from employees
 	  group by job_id) ss,
-	 jobs js
+	  jobs js
 where ss.job_id = js.job_id
 order by ss.salary desc;
 
